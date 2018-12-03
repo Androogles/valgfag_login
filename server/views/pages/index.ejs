@@ -1,0 +1,61 @@
+<% extend ('../partials/template') %>
+
+<h1>Login To Continue</h1>
+
+<form id="login_form" action="/login" method="post">
+    <div>
+        <label for="user_email_input">Email:</label>
+        <input type="email" name="user_email_input" id="user_email_input" value="<%= email_value %>">
+        <span id="error_msg_email"></span>
+        <span id="email_check"></span>
+    </div>
+
+    <div>
+        <label for="user_password_input">Password:</label>
+        <input type="password" name="user_password_input" name="user_password_input">
+        <span id="error_msg_password"></span>
+    </div>
+
+    <span id="login_error">
+        <%= login_error %>
+    </span>
+
+    <div>
+        <button type="submit" id="loginBtn">Login</button>
+        <a href="/forgotten/:key">Forgotten your Password?</a>
+        <a href="/signup">Create User</a>
+    </div>
+</form>
+
+<script>
+    document.querySelector('#login_form button').addEventListener('click', (event) => {
+        event.preventDefault();
+        let form_valid = true;
+        let error_msg_email = document.getElementById("error_msg_email");
+        let error_msg_password = document.getElementById("error_msg_password");
+        let form = document.querySelector('#login_form');
+
+        error_msg_email.textContent = "";
+        error_msg_password.textContent = "";
+
+        // her foretages valideringen som normalt.
+        if (form.user_email_input.value == "") {
+            form_valid = false;
+            error_msg_email.textContent = "Type your email";
+        }
+
+        if (form.user_email_input.value != "" && !validateEmail(user_email_input.value)) {
+            form_valid = false;
+            document.getElementById('email_check').textContent = user_email_input.value + " is not a valid email";
+        }
+
+        if (form.user_password_input.value == "") {
+            form_valid = false;
+            error_msg_password.textContent = "Type your password";
+        }
+        // når valideingen er ok, sendes form data
+        if (form_valid == true) {
+            form.submit();
+        }
+    })
+</script>

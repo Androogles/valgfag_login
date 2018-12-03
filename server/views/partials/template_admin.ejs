@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <script src="/scripts/helpers.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <h1>DocBase</h1>
+            <nav>
+                <ul>
+                    <li class="<%= (page=='admin_index' ? 'active' : '') %>">
+                        <a href="/admin/index">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <%- content %>
+        </main>
+
+        <footer>
+            <p>footer Admin</p>
+        </footer>
+    </div>
+</body>
+
+</html>
