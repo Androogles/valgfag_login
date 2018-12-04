@@ -4,11 +4,41 @@
     box-sizing: border-box;
 }
 
-nav ul li.active {
-    background-color: aqua;
+.btn.btn-link {
+    color: grey;
+    border: 1px solid transparent;
+    border-radius:5px;
 }
 
-#wrapper {
-    width: 80%;
-    margin: 0 auto;
+.btn.btn-link:hover {
+    text-decoration: none;
+    border: 1px solid #2e6da4;
+    background-color: #337ab7;
+    color: white;
 }
+
+
+
+meter {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  
+    margin: 0 auto 1em;
+    width: 100%;
+    height: 0.5em;
+  
+    /* Applicable only to Firefox */
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+
+
+
