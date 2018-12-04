@@ -24,6 +24,9 @@ app.use(session({
     }
 }));
 
+const uuidv4 = require('uuid/v4');
+uuidv4(); // ⇨ '10ba038e-48da-487b-96e8-8d3b99b6d18a'
+
 // konfigurer bodyparser
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -35,20 +38,18 @@ app.use(bodyParser.urlencoded({
 // altid logget ind som admin
 // app.get("*", (req, res, next) => {
 //     req.session.user_id = null;
-//     req.session.login_id = 1;
-//     req.session.rank_level = 100;
 
 //     next();
 // })
 
 // global validering
-// app.get("/admin/*", (req, res, next) => {
-//     if (req.session.login_id == undefined || req.session.rank_level < 100) {
-//         res.redirect('/');
-//     } else {
-//         next();
-//     }
-// })
+app.get("/admin/*", (req, res, next) => {
+    if (req.session.user_id == undefined) {
+        res.redirect('/');
+    } else {
+        next();
+    }
+})
 
 require('./routes/frontend.js')(app);
 require('./routes/admin.js')(app);
