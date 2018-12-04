@@ -1,0 +1,46 @@
+<% extend ('../partials/template') %>
+
+<h1>Reset Password</h1>
+
+<form id="forgotten_form" action="/forgotten" method="post">
+    <div class="form-group">
+        <label for="forgotten_email_input">Email address</label>
+        <input type="email" class="form-control" id="forgotten_email_input" name="forgotten_email_input" placeholder="Enter email">
+        <span id="error_msg_forgotten_email" class="form-text text-danger"></span>
+        <span id="email_check" class="form-text text-danger"></span>
+
+        <span id="forgotten_error" class="form-text text-danger">
+            <%= forgotten_error %>
+        </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send email</button>
+    <a href="/" class="btn btn-link">Annuler</a>
+</form>
+
+
+<script>
+    document.querySelector('#forgotten_form button').addEventListener('click', (event) => {
+        event.preventDefault();
+        let form_valid = true;
+        let error_msg_forgotten_email = document.getElementById("error_msg_forgotten_email");
+        let form = document.querySelector('#forgotten_form');
+
+        error_msg_forgotten_email.textContent = "";
+        email_check.textContent = "";
+
+        if (form.forgotten_email_input.value == "") {
+            form_valid = false;
+            error_msg_forgotten_email.textContent = "type your email";
+        }
+
+        if (form.forgotten_email_input.value != "" && !validateEmail(forgotten_email_input.value)) {
+            form_valid = false;
+            document.getElementById('email_check').textContent = forgotten_email_input.value + " is not a valid email";
+        }
+
+        if (form_valid == true) {
+            form.submit();
+        }
+    })
+</script>

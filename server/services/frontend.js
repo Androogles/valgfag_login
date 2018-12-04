@@ -45,4 +45,29 @@ module.exports = {
             db.end();
         });
     },
+
+
+
+    // ====================   Check Db for Mail   ====================
+    send_email: (user_email) => {
+        return new Promise((resolve, reject) => {
+            let db = mysql.connect();
+            db.execute(`SELECT user_id, user_email, user_password
+                            FROM users 
+                            WHERE user_email = ?`, [user_email], (err, rows) => {
+                    if (err) {
+                        console.log(err.message);
+                        reject(err.message);
+                    } else {
+                        if (rows.length == 1) {
+                            resolve(rows[0]);
+                        } else {
+                            reject('wrong email or password');
+                        }
+                    }
+                });
+            db.end();
+        });
+    },
+
 }
