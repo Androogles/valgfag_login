@@ -1,7 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+h1 {
+    width: 65%;
+    margin: 2em auto 3px auto;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 2em;
+    color: white;
+    font-family: 'Righteous', cursive; 
+}
+
+body {
+    background-color: black;
 }
 
 .btn.btn-link {
@@ -17,6 +33,43 @@
     color: white;
 }
 
+#login_form, #register_form, #forgotten_form {
+    width: 65%;
+    margin: 0 auto;
+    color: white;
+    /* font-family: 'Righteous', cursive;  */
+    /* font-weight: lighter; */
+    /* letter-spacing: 1px; */
+    border: 1px solid  rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius:10px;
+    padding: 2em; 
+}
+
+.activate-account-box {
+    text-align: center;
+}
+
+.activate-account-box p {
+    color: grey;
+}
+
+
+@media only screen and (max-width: 700px) {
+    #login_form, #register_form, #forgotten_form {
+        width: 100%;
+        padding: 1em 0.6em;
+        border:none;
+    }
+    h1 {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+
+
 
 
 meter {
@@ -28,17 +81,36 @@ meter {
     margin: 0 auto 1em;
     width: 100%;
     height: 0.5em;
+    border-radius: 4px;
   
     /* Applicable only to Firefox */
     background: none;
     background-color: rgba(0, 0, 0, 0.1);
-  }
+}
   
-  meter::-webkit-meter-bar {
+meter::-webkit-meter-bar {
     background: none;
     background-color: rgba(0, 0, 0, 0.1);
-  }
+}
 
+#meter-box {
+    height: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
+meter[value="1"] { background: red; width: 25%; }
+meter[value="2"] { background: yellow; width: 50%; }
+meter[value="3"] { background: orange; width: 75%; }
+meter[value="4"] { background: green; widows: 100%; }
 
+/* Webkit based browsers */
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
 
+/* Gecko based browsers */
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }
