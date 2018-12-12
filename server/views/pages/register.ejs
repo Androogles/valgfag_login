@@ -1,0 +1,124 @@
+<% extend ('../partials/template') %>
+
+<h1>Register Here</h1>
+<form id="register_form" action="/register" method="post">
+    <div class="form-group">
+        <label for="user_name_input">User Name</label>
+        <input type="text" name="user_name_input" class="form-control" value="<%= one_user.user_name %>" id="user_name_input"
+            placeholder="Enter username">
+        <span id="error_msg_name" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="user_email_input">Email address</label>
+        <input type="text" name="user_email_input" class="form-control" value="<%= one_user.user_email %>" id="user_email_input"
+            placeholder="Enter email">
+        <span id="error_msg_email" class="form-text text-danger"></span>
+        <span id="email_check" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="user_password_input">Password</label>
+        <input type="password" name="user_password_input" class="form-control" value="" id="user_password_input"
+            placeholder="Enter password">
+        <span id="error_msg_password" class="form-text text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div id="meter-box">
+            <meter max="4" id="password-strength-meter"></meter>
+        </div>
+
+        <div class="meter-text">
+            <span id="password-strength-text"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="user_password_repeat_input">Repeat:</label>
+        <input type="password" name="user_password_repeat_input" class="form-control" value="" id="user_password_repeat_input"
+            placeholder="Repeat password">
+        <span id="error_msg_repeat" class="form-text text-danger"></span>
+    </div>
+
+
+    <button class="btn btn-primary">Submit</button>
+    <a href="/login" class="btn btn-link">Annuler</a>
+</form>
+
+
+<script>
+    // Form button
+    document.querySelector('#register_form button').addEventListener('click', (event) => {
+        event.preventDefault();
+        let form_valid = true;
+        let error_msg_name = document.getElementById("error_msg_name");
+        let error_msg_email = document.getElementById("error_msg_email");
+        let error_msg_password = document.getElementById("error_msg_password");
+        let error_msg_repeat = document.getElementById("error_msg_repeat");
+        let form = document.querySelector('#register_form');
+
+        error_msg_name.textContent = "";
+        error_msg_email.textContent = "";
+        email_check.textContent = "";
+        error_msg_password.textContent = "";
+        error_msg_repeat.textContent = "";
+
+        if (form.user_name_input.value == "") {
+            form_valid = false;
+            error_msg_name.textContent = "type your username";
+        }
+
+        if (form.user_email_input.value == "") {
+            form_valid = false;
+            error_msg_email.textContent = "type your email";
+        }
+
+        if (form.user_email_input.value != "" && !validateEmail(user_email_input.value)) {
+            form_valid = false;
+            document.getElementById('email_check').textContent = user_email_input.value + " is not a valid email";
+        }
+
+        if (form.user_password_input.value == "" || form.user_password_input.value == undefined) {
+            form_valid = false;
+            error_msg_password.textContent = "choose password";
+        }
+
+        if (form.user_password_input.value != form.user_password_repeat_input.value) {
+            form_valid = false;
+            error_msg_repeat.textContent = "passwords do not match";
+        }
+
+        if (form_valid == true) {
+            form.submit();
+        }
+    })
+
+    // Password meter
+    var strength = {
+        0: "Worst ",
+        1: "Bad ",
+        2: "Weak ",
+        3: "Good ",
+        4: "Strong "
+    }
+
+    var password = document.getElementById('user_password_input');
+    var meter = document.getElementById('password-strength-meter');
+    var text = document.getElementById('password-strength-text');
+
+    password.addEventListener('input', function () {
+        var val = password.value;
+        var result = zxcvbn(val);
+
+        // Update the password strength meter
+        meter.value = result.score;
+
+        // Update the text indicator
+        if (val !== "") {
+            text.innerHTML = "Strength: " + "<strong>" + strength[result.score] + "</strong>" + "<span class='feedback'>" + result.feedback.warning + " " + result.feedback.suggestions + "</span>";
+        } else {
+            text.innerHTML = "";
+        }
+    });
+</script>
