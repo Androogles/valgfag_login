@@ -1,0 +1,60 @@
+<% extend ('../partials/template') %>
+
+
+<h1>Login to continue</h1>
+<form id="login_form" action="/login" method="post">
+    <div class="form-group">
+        <label for="user_email_input">Email address</label>
+        <input type="email" class="form-control" id="user_email_input" name="user_email_input" value="<%= email_value %>"
+            placeholder="Enter email">
+        <span id="error_msg_email" class="form-text text-danger"></span>
+        <span id="email_check" class="form-text text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="user_password_input">Password</label>
+        <input type="password" class="form-control" name="user_password_input" id="user_password_input" placeholder="Enter password">
+        <span id="error_msg_password" class="form-text text-danger"></span>
+        <span id="login_error" class="form-text text-danger">
+            <%= login_error %>
+        </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+    <a href="/forgotten" class="btn btn-link">Forgotten Password?</a>
+    <a href="/register" class="btn btn-link">Create User?</a>
+</form>
+
+<script>
+    document.querySelector('#login_form button').addEventListener('click', (event) => {
+        event.preventDefault();
+        let form_valid = true;
+        let error_msg_email = document.getElementById("error_msg_email");
+        let error_msg_password = document.getElementById("error_msg_password");
+        let login_error = document.getElementById("login_error");
+        let form = document.querySelector('#login_form');
+
+        error_msg_email.textContent = "";
+        error_msg_password.textContent = "";
+        email_check.textContent = "";
+        login_error.textContent = "";
+
+        if (form.user_email_input.value == "") {
+            form_valid = false;
+            error_msg_email.textContent = "type your email";
+        }
+
+        if (form.user_email_input.value != "" && !validateEmail(user_email_input.value)) {
+            form_valid = false;
+            document.getElementById('email_check').textContent = user_email_input.value + " is not a valid email";
+        }
+
+        if (form.user_password_input.value == "") {
+            form_valid = false;
+            error_msg_password.textContent = "type your password";
+        }
+
+        if (form_valid == true) {
+            form.submit();
+        }
+    })
+</script>
