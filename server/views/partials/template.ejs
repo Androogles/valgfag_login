@@ -35,7 +35,12 @@
                             <li class="<%= (page=='index' ? 'active' : '') %>">
                                 <a href="/">Home</a>
                             </li>
+
                             <% if(session.user_id != undefined) { %>
+                            <li class="<%= (page=='chat' ? 'active' : '') %>">
+                                <a href="/chat">Chat</a>
+                            </li>
+
                             <li>
                                 <a href="/logout">Logout</a>
                             </li>

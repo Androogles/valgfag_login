@@ -41,6 +41,9 @@ module.exports = (app) => {
                                         req.session.cookie.expires = false;
                                         // gem de nødvendige variabler i vores session variabel.
                                         req.session.user_id = user.user_id;
+                                        req.session.user_email = user_email;
+                                        req.session.user_rank_level = user.user_rank_level;
+                                        req.session.user_verified = user.user_verified;
                                         res.redirect('/');
                                     } else {
                                         // kodeordet kunne ikke verificeres, dvs brugeren er ikke logget på

@@ -14,6 +14,7 @@ module.exports = (app) => {
             "session": req.session
         });
     });
+
     // ========================   Login Page   ========================
     app.get('/login', (req, res) => {
         res.render('pages/login', {
@@ -74,4 +75,15 @@ module.exports = (app) => {
             "session": req.session,
         });
     })
+
+    // ========================   Chat Page   ========================
+    app.get('/chat', (req, res) => {
+        res.render('pages/chat', {
+            "page": "chat",
+            "title": "Chat",
+            "login_error": "",
+            "email_value": "",
+            "session": req.session
+        });
+    });
 }

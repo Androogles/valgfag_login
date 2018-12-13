@@ -1,0 +1,73 @@
+<% extend ('../partials/template') %>
+
+<h1>Chatbox</h1>
+
+<div id="chatbox">
+    <div id="chat_messages">
+        <!-- <div class="message">
+            <span class="user">Username</span>
+            <span class="time">09:32.55</span>
+
+            <div>ipsum dolor sit amet consectetur adipisicing elit.</div>
+        </div>
+
+        <div class="message">
+            <span class="user">Username</span>
+            <span class="time">09:32.55</span>
+
+            <div>ipsum dolor sit amet consectetur adipisicing elit. Quibusdam autem commodi sunt natus rerum distinctio
+                unde magnam, maxime officia sit.</div>
+        </div> -->
+    </div>
+</div>
+
+<ul id="messages"></ul>
+<span id="typing"></span>
+
+<form id="chat_form">
+    <input id="m" autocomplete="off" placeholder="message">
+    <button>Send</button>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+
+<script>
+    let socket = io.connect('http://localhost:3000');
+    document.querySelector('#chat_form button').addEventListener('click', (event) => {
+        event.preventDefault();
+        let message = document.querySelector('#m');
+        if (message.value.length > 0) {
+            socket.emit('message to server', {
+                'message': message.value
+            });
+        }
+        message.value = '';
+    });
+
+    socket.on('message to clients', (payload) => {
+        let message = document.createElement('div');
+        message.setAttribute('class', 'message');
+
+        let time = document.createElement('span');
+        time.setAttribute('class', 'time');
+
+        let user = document.createElement('span');
+        user.setAttribute('class', 'user');
+
+        let content = document.createElement('span');
+        content.setAttribute('class', 'content');
+
+        let d = new Date(payload.time);
+
+        user.textContent = payload.user;
+
+        time.textContent = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
+        content.textContent = payload.message;
+
+        message.appendChild(user);
+        message.appendChild(time);
+        message.appendChild(content);
+
+        document.querySelector('#chat_messages').appendChild(message);
+    })
+</script>

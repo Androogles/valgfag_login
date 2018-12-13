@@ -37,11 +37,7 @@ body {
     width: 65%;
     margin: 0 auto;
     color: white;
-    /* font-family: 'Righteous', cursive;  */
-    /* font-weight: lighter; */
-    /* letter-spacing: 1px; */
     border: 1px solid  rgba(255, 255, 255, 0.5);
-    /* background-color: rgba(255, 255, 255, 0.1); */
     background-color: rgba(0, 0, 0, 0.1);
     border-radius:10px;
     padding: 2em; 
@@ -53,6 +49,45 @@ body {
 
 .activate-account-box p {
     color: grey;
+}
+
+#chatbox {
+    width: 65%;
+    margin: 0 auto;
+}
+
+#chat_messages {
+    padding: 5px;
+}
+
+.message {
+    max-width: 50%;
+    border:1px solid white;
+    background: #184c7a;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.user {
+    color: white;
+    float: left;
+}
+
+.time {
+    color: white;
+    float: right;
+}
+
+.content {
+    color: black;
+    clear: both;
+    display: block;
+}
+
+#chat_form {
+    width: 65%;
+    margin: 0 auto;
 }
 
 
